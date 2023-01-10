@@ -1,0 +1,26 @@
+h1 {
+    margin: auto;
+    text-align: center;
+}
+
+.grid {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    background-color: black;
+}
+
+.unit {
+    width: 10px;
+    height: 10px;
+}
+
+.snake {
+    background-color: green;
+}
+
+.apple {
+    background-color: red;
+}
