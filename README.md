@@ -5,4 +5,8 @@ Snake in JavaScript.
 Download and run in a browser.
 
 # Controls
-Use arrow keys to move, reload the page to restart the game.
+Use arrow keys to move.
+
+#Todo
+- [ ] Refactor/Clean Up Code
+- [ ] 
