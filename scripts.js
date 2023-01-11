@@ -1,7 +1,13 @@
 let grid = document.getElementById("grid");
 let scoreDisplay = document.getElementById("score");
-let status = document.getElementById("status");
 let gridWidth = 20, gridHeight = 20;
+let snakeSpeed = 75;
+
+let restartButton = document.createElement("button");
+restartButton.classList.add("restart");
+restartButton.innerHTML = "Restart";
+restartButton.addEventListener("click", initialize);
+document.querySelector("body").appendChild(restartButton);
 
 let direction;
 let score;
@@ -130,11 +136,17 @@ function initialize() {
 
     grid = document.getElementById("grid");
     scoreDisplay = document.getElementById("score");
-    status = document.getElementById("status");
+    scoreDisplay.innerHTML = "Score: 0";
+    snakeSpeed = 75;
     gridWidth = 20, gridHeight = 20;
 
     direction = "RIGHT";
     score = 0;
+
+    // Empty the grid
+    while (grid.firstChild) {
+        grid.removeChild(grid.firstChild);
+    }
 
     // Setup the grid
     for (let i = 0; i < gridWidth * gridHeight; i++) {
@@ -148,17 +160,22 @@ function initialize() {
     snakes.push(new Snake(5, "RIGHT", 4));
     apples.push(new Apple(Math.floor(Math.random() * gridWidth * gridHeight)))
     
-    updateId = setInterval(update, 75);
     document.addEventListener('keydown', updateDirection);
+    clearTimeout(updateId);
+    update();
 }
 
 function update() { 
+    updateId = setTimeout(update, snakeSpeed);
+    snakeSpeed = 75 - score*2;
     snakes.forEach(snake => {
         snake.update(direction); 
 
+
         if (snake.dead) {
-            clearInterval(updateId);
-            status.innerHTML = "Status: You Lost";
+            clearTimeout(updateId);
+            scoreDisplay.innerHTML = "You Lost, Your Score is " + score;
+            
         }
 
         apples.forEach(apple => {
