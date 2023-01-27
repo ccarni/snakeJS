@@ -47,19 +47,7 @@ class Snake {
 
     update(direction, _gridArray) {
         this.dir = direction;
-        // move the rest of the body
-        for (let i = this.body.length - 1; i > 0; i--) {
-            this.body[i] = this.body[i - 1];
-        }
-
-        // Move the head
-        if (this.dir == "RIGHT") this.body[0]++;
-        else if (this.dir == "LEFT") this.body[0]--;
-        else if (this.dir == "UP") this.body[0] -= 20;
-        else if (this.dir == "DOWN") this.body[0] += 20;
-
-        this.pos = this.body[0];
-
+ 
         if (this.body.slice(1).includes(this.body[0])){
             this.dead = true;
         }
@@ -74,7 +62,20 @@ class Snake {
 
         if (((this.body[0] + 1) % 20 == 0) && (this.dir == "RIGHT")) {
             this.dead = true;
+        }      
+    
+        // move the rest of the body
+        for (let i = this.body.length - 1; i > 0; i--) {
+            this.body[i] = this.body[i - 1];
         }
+
+        // Move the head
+        if (this.dir == "RIGHT") this.body[0]++;
+        else if (this.dir == "LEFT") this.body[0]--;
+        else if (this.dir == "UP") this.body[0] -= 20;
+        else if (this.dir == "DOWN") this.body[0] += 20;
+
+        this.pos = this.body[0];
         
     }
 
